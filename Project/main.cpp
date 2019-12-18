@@ -51,6 +51,7 @@ double Newton2(double x, double epsilon)
         k++;
     }
     while(fabs(h) >= epsilon);
+    cout<<"k: "<<k<<"  ";
     return x;
 }
 
@@ -83,6 +84,7 @@ double newton(double x, double epsilon)
         k++;
     }
     while(fabs(h) >= epsilon);
+    cout<<"k: "<<k<<"  ";
     return x;
 }
 
@@ -104,7 +106,7 @@ double wielopunktowa(double x, double elipson)
 
 int main()
 {
-    cout.precision();
+    cout.precision(15);
 
     double eps;
     double rez;
@@ -113,7 +115,7 @@ int main()
     {
         eps = pow(10, -i);
         cout<<"e = "<<eps<<" ";
-        rez = wielopunktowa(3, eps);
+        rez = wielopunktowa(i, eps);
         cout<<"x = "<<rez<<endl;
     }
     cout<<"*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*/"<<endl;
@@ -129,24 +131,23 @@ int main()
 
     cout<<"*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*/"<<endl;
     cout<<"metoda wielopunktowa, z bladem, X-const"<<endl;
-    double x1 = -1.4124;
-    double x2 = 1.3853;
+    double x1 = 3.1393661328361496816;  /// x1
     double blad = 0;
     for(int i = 3; i <= 15; i++)
     {
         eps = pow(10, -i);
         cout<<"e = "<<eps;
-        rez = wielopunktowa(3, eps);
+        rez = wielopunktowa(i, eps);
         cout<<"x = "<<rez;
         if(rez<0) blad = fabs(rez - x1)/fabs(x1);
-        else if(rez>0) blad = fabs(rez - x2)/fabs(x2);
+       // else if(rez>0) blad = fabs(rez - x1)/fabs(x1);
 
         cout<<"  blad = "<<blad<<endl;// wzgledny blad
     }
 
     cout<<"*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*/"<<endl;
     cout<<"metoda wielopunktowa, z bladem, E-const"<<endl;
-    x1 = 0;
+    //x1 = 0;
     blad = 0;
     for(float i = -3; i <= 3; i+=0.4)
     {
@@ -154,7 +155,8 @@ int main()
         cout<<"x0 =  "<<i<<"  ";
         rez = wielopunktowa(i,eps);
         cout<<"x = "<<rez;
-        blad = fabs(rez - x1);/// wzgledny blad
+        //blad = fabs(rez - x1);/// wzgledny blad
+        blad = fabs((rez - x1)/x1);
         cout<<"  blad = "<<blad<<endl;
     }
 
@@ -165,7 +167,7 @@ int main()
     {
         eps = pow(10, -i);
         cout<<"e = "<<eps<<" ";
-        rez = newton(3, eps);
+        rez = newton(i, eps);
         cout<<"x = "<<rez<<endl;
     }
     cout<<"*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*/"<<endl;
@@ -179,20 +181,20 @@ int main()
     }
     cout<<"*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*/"<<endl;
     cout<<"metoda newtona, z bladem, X-const"<<endl;
-    x1 = 0;
+    //x1 = 0;
     blad = 0;
     for(int i = 3; i <= 15; i++)
     {
         eps = pow(10, -i);
         cout<<"e = "<<eps;
-        rez = newton(3, eps);
+        rez = newton(i, eps);
         cout<<"x = "<<rez;
-        blad = fabs(rez - x1);
+        blad = fabs((rez - x1)/x1);
         cout<<"  blad = "<<blad<<endl;// wzgledny blad
     }
     cout<<"*/*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*/"<<endl;
     cout<<"metoda newtona, z bladem, E-const"<<endl;
-    x1 = 0;
+    //x1 = 0;
     blad = 0;
     for(float i = -3; i <= 3; i+=0.4)
     {
@@ -200,7 +202,7 @@ int main()
         cout<<"x0 =  "<<i<<"  ";
         rez = newton(i,eps);
         cout<<"x = "<<rez;
-        blad = fabs(rez - x1);
+        blad = fabs((rez - x1)/x1);
         cout<<"  blad = "<<blad<<endl;// wzgledny blad
     }
 
@@ -208,11 +210,11 @@ int main()
     /// ниже должно быть свое уравнение
 
 
-    cout << endl << "ROWNANIE: " << endl;
+    cout << endl << "ROWNANIE: " << endl; /// 4*x^3 - 12*x^2 + 6
     //PIERWIASTKI ROWNANIA
-    x1 = -0.64178;
-    x2 = 0.83175;
-    double x3 = 2.8100;
+    x1 = -0.641783527452926;
+    double x2 = 0.831745598218973;
+    double x3 = 2.81003792923395;
     cout << "Metoda wielopunktowa: " << endl;
 
     cout << "A (x-const):" << endl;
@@ -221,7 +223,7 @@ int main()
     {
         eps = pow(10, -i);
         cout << "e: " << eps <<endl;
-        double w = wielopunkt2(3, eps);
+        double w = wielopunkt2(i, eps);
          cout << "x:" <<w << endl << endl;
 
     }
@@ -246,7 +248,7 @@ int main()
     {
         eps = pow(10, -i);
         cout << "e: " << eps <<endl;
-        double w = wielopunkt2(3, eps);
+        double w = wielopunkt2(i, eps);
         cout << "x:" <<w <<endl;
         if(w<0) blad = (fabs(w-x1)/fabs(x1));
         else if(w>1) blad = (fabs(w-x2)/fabs(x2));
@@ -280,7 +282,7 @@ int main()
     {
         eps = pow(10, -i);
         cout << "e: " << eps <<endl;
-        double w = Newton2(3, eps);
+        double w = Newton2(i, eps);
          cout << "x:" <<w << endl << endl;
 
     }
@@ -313,6 +315,7 @@ int main()
         cout << "blad:" << blad <<endl << endl;
 
     }
+
 
      cout << "/------------------------------------------------------/" << endl;
     cout << "D (e-const): " << endl;
